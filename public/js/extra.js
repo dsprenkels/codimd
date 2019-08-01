@@ -348,7 +348,7 @@ export function finishView (view) {
       $value.html('')
       chart.drawSVG(value, {
         'line-width': 2,
-        'fill': 'none',
+        fill: 'none',
         'font-size': '16px',
         'font-family': "'Andale Mono', monospace"
       })
@@ -739,12 +739,12 @@ export function generateToc (id) {
   target.html('')
   /* eslint-disable no-unused-vars */
   var toc = new window.Toc('doc', {
-    'level': 3,
-    'top': -1,
-    'class': 'toc',
-    'ulClass': 'nav',
-    'targetId': id,
-    'process': getHeaderContent
+    level: 3,
+    top: -1,
+    class: 'toc',
+    ulClass: 'nav',
+    targetId: id,
+    process: getHeaderContent
   })
   /* eslint-enable no-unused-vars */
   if (target.text() === 'undefined') { target.html('') }
@@ -827,7 +827,7 @@ const linkifyAnchors = (level, containingElement) => {
   const headers = containingElement.getElementsByTagName(`h${level}`)
 
   for (let i = 0, l = headers.length; i < l; i++) {
-    let header = headers[i]
+    const header = headers[i]
     if (header.getElementsByClassName('anchor').length === 0) {
       if (typeof header.id === 'undefined' || header.id === '') {
         // to escape characters not allow in css and humanize
@@ -886,12 +886,12 @@ export function renderTOC (view) {
     const target = $(`#${id}`)
     target.html('')
     /* eslint-disable no-unused-vars */
-    let TOC = new window.Toc('doc', {
-      'level': 3,
-      'top': -1,
-      'class': 'toc',
-      'targetId': id,
-      'process': getHeaderContent
+    const TOC = new window.Toc('doc', {
+      level: 3,
+      top: -1,
+      class: 'toc',
+      targetId: id,
+      process: getHeaderContent
     })
     /* eslint-enable no-unused-vars */
     if (target.text() === 'undefined') { target.html('') }
@@ -939,7 +939,7 @@ function highlightRender (code, lang) {
   return result.value
 }
 
-export let md = markdownit('default', {
+export const md = markdownit('default', {
   html: true,
   breaks: true,
   langPrefix: '',
@@ -992,7 +992,7 @@ md.use(markdownitContainer, 'info', { render: renderContainer })
 md.use(markdownitContainer, 'warning', { render: renderContainer })
 md.use(markdownitContainer, 'danger', { render: renderContainer })
 
-let defaultImageRender = md.renderer.rules.image
+const defaultImageRender = md.renderer.rules.image
 md.renderer.rules.image = function (tokens, idx, options, env, self) {
   tokens[idx].attrJoin('class', 'raw')
   return defaultImageRender(...arguments)
